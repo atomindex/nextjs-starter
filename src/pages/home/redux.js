@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import update from 'immutability-helper';
-import api from '../../api';
+import api from '~/api';
 import { slices as simpleLayoutSlices, getState as getSimpleLyaoutState } from '~/layouts/simple/redux';
 
-export const getState = async () => {
-    const layout = await getSimpleLyaoutState();
-    const posts = await api.post.list();
+export const getState = async ({ authToken }) => {
+    const layout = await getSimpleLyaoutState({ authToken });
+    const posts = await api.post.list({ authToken });
     return { 
         ...layout,
         page: {
